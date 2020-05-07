@@ -4,9 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { GraphQLClient, ClientContext } from 'graphql-hooks'
+
+const client = new GraphQLClient({
+  url: 'http://localhost:4001/graphql',
+  fetchOptions: {
+    credentials: 'include'
+  }
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ClientContext.Provider value={client}>
+      <App />
+    </ClientContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
