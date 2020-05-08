@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMutation } from "graphql-hooks";
+import React, { useState, useContext } from "react";
+import { useMutation, ClientContext } from "graphql-hooks";
 import { useHistory } from "react-router-dom";
 import { setAccessToken } from "../acessToken";
 
@@ -21,6 +21,7 @@ mutation Login(
 
 function Login() {
   const history = useHistory();
+  const client = useContext(ClientContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useMutation(LOGIN_MUTATION);
@@ -37,7 +38,7 @@ function Login() {
         });
 
         if (response?.data?.login?.accessToken) {
-          setAccessToken(response.data.login.accessToken);
+          setAccessToken(response.data.login.accessToken, client);
           history.push("/");
         }
       }}

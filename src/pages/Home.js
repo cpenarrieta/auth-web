@@ -18,7 +18,7 @@ function Home() {
   }
 
   if (error) {
-    return <div>error...</div>;
+    return <div>Not authenticated...</div>;
   }
 
   return (

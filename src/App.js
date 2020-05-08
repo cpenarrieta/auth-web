@@ -14,8 +14,7 @@ function App() {
     }).then(async (res) => {
       const { accessToken } = await res.json();
       if (accessToken) {
-        client.setHeader("authorization", `Bearer ${accessToken}`);
-        setAccessToken(accessToken);
+        setAccessToken(accessToken, client);
       }
       setLoading(false);
     });
